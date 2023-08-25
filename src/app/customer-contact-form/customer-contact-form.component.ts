@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-customer-contact-form',
@@ -12,13 +12,47 @@ export class CustomerContactFormComponent {
 
   constructor(fb: FormBuilder) {
     this.form = fb.group({
-      firstName: ['Nathan'],
-      lastName: ['Pedigo']
+      firstName: [ 'John' ],
+      lastName: [ 'Doe' ],
+      // new FormArray object:
+      phoneNumbers: fb.array([fb.group({
+        alias: ['Home'],
+        number: ['555-555-5555']
+      })]),
+      // ^^^ new FormArray object ^^^
+      address: fb.group({
+        street: ['123 Main St.'],
+        city: ['Salt Lake City'],
+        state: ['UT'],
+        zip: ['84001']
+      })
     });
   }
 
   reset(): void {
     this.form.controls['firstName'].setValue('');
     this.form.controls['lastName'].setValue('');
+  }
+
+  fillDefaultAddress(): void {
+    this.form.patchValue({
+      address: {
+        street: '456 Default St',
+        city: 'Defaultolopolis',
+        state: 'CA',
+        zip: '90000',
+      }
+    });
+  }
+
+  get phoneNumbers(): FormArray {
+    return this.form.get('phoneNumbers') as FormArray;
+  }
+
+  addPhone(): void {
+    this.phoneNumbers.push(this.fb.group({
+      alias: [''],
+      number: ['']
+    }));
   }
 }

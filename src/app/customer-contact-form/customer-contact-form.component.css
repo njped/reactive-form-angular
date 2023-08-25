@@ -5,3 +5,12 @@ mat-card {
 section {
   margin-bottom: 20px;
 }
+
+mat-card-title {
+  margin-left: 15px;
+}
+
+#nestedTitle {
+  margin-left: 0;
+}
+
