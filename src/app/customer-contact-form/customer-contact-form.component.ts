@@ -14,18 +14,18 @@ export class CustomerContactFormComponent {
     this.form = fb.group({
       firstName: [ 'John' ],
       lastName: [ 'Doe' ],
+      address: fb.group({
+        street: ['123 Main St.'],
+        city: ['Salt Lake City'],
+        state: ['UT'],
+        zip: ['84001']
+      }),
       // new FormArray object:
       phoneNumbers: fb.array([fb.group({
         alias: ['Home'],
         number: ['555-555-5555']
       })]),
       // ^^^ new FormArray object ^^^
-      address: fb.group({
-        street: ['123 Main St.'],
-        city: ['Salt Lake City'],
-        state: ['UT'],
-        zip: ['84001']
-      })
     });
   }
 
